@@ -1,6 +1,7 @@
 import React from "react";
 import { NativeBaseProvider, VStack, extendTheme } from "native-base";
 import { Header } from "./components/Header";
+import { WeekBlock } from "./components/WeekBlock/WeekBlock";
 
 // Define the config
 const theme = extendTheme({
@@ -12,15 +13,18 @@ const theme = extendTheme({
     white: "#FFF0CB",
     black: "#222222",
     red: "#E5C1BD",
-    blueGreen: "#BDCEBE",
+    green: "#BDCEBE",
   },
 });
 
 export default function App() {
   return (
     <NativeBaseProvider theme={theme}>
-      <VStack bg={"dark.default"} flex={1} pt={"70px"}>
+      <VStack bg={"black"} flex={1} pt={"70px"}>
         <Header />
+        <VStack flex={1} flexDirection={"column"} alignItems={"center"}>
+          <WeekBlock />
+        </VStack>
       </VStack>
     </NativeBaseProvider>
   );

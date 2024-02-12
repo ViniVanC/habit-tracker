@@ -7,6 +7,7 @@ export const Header = () => {
   return (
     <HStack
       px={"20px"}
+      pb={"20px"}
       w={"full"}
       space={5}
       alignItems="center"
