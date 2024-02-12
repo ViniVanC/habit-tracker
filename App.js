@@ -2,6 +2,7 @@ import React from "react";
 import { NativeBaseProvider, VStack, extendTheme } from "native-base";
 import { Header } from "./components/Header";
 import { WeekBlock } from "./components/WeekBlock/WeekBlock";
+import { HabitsList } from "./components/HabitsList";
 
 // Define the config
 const theme = extendTheme({
@@ -24,6 +25,7 @@ export default function App() {
         <Header />
         <VStack flex={1} flexDirection={"column"} alignItems={"center"}>
           <WeekBlock />
+          <HabitsList />
         </VStack>
       </VStack>
     </NativeBaseProvider>
