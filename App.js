@@ -1,35 +1,27 @@
 import React from "react";
-import {
-  Text,
-  HStack,
-  Center,
-  Switch,
-  useColorMode,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-} from "native-base";
+import { NativeBaseProvider, VStack, extendTheme } from "native-base";
+import { Header } from "./components/Header";
 
 // Define the config
-const config = {
-  useSystemColorMode: false,
-  initialColorMode: "dark",
-};
-
-// extend the theme
-export const theme = extendTheme({ config });
+const theme = extendTheme({
+  config: {
+    useSystemColorMode: false,
+    initialColorMode: "dark",
+  },
+  colors: {
+    white: "#FFF0CB",
+    black: "#222222",
+    red: "#E5C1BD",
+    blueGreen: "#BDCEBE",
+  },
+});
 
 export default function App() {
   return (
-    <NativeBaseProvider config={theme}>
-      <Center
-        _dark={{ bg: "#222222" }}
-        _light={{ bg: "#fff0cb" }}
-        px={4}
-        flex={1}
-      >
-        <VStack space={5} alignItems="center"></VStack>
-      </Center>
+    <NativeBaseProvider theme={theme}>
+      <VStack bg={"dark.default"} flex={1} pt={"70px"}>
+        <Header />
+      </VStack>
     </NativeBaseProvider>
   );
 }
