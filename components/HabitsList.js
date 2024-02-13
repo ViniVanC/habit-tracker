@@ -7,7 +7,6 @@ export const HabitsList = () => {
     <ScrollView>
       <VStack space={"10px"} alignItems="center" py={"20px"}>
         <Habit />
-        <Habit />
       </VStack>
     </ScrollView>
   );
