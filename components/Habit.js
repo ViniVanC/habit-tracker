@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, HStack, Pressable, Text, VStack } from "native-base";
+import { Box, HStack, Pressable, Text, VStack, useToken } from "native-base";
+import { CheckMark } from "./CheckMark";
 
 export const Habit = () => {
   const [days, setDays] = useState([]);
@@ -94,7 +95,7 @@ export const Habit = () => {
   };
 
   return (
-    <Pressable w={"300px"}>
+    <Pressable w={"300px"} >
       <VStack
         space={"10px"}
         p={"10px"}
@@ -125,7 +126,7 @@ export const Habit = () => {
             alignItems={"center"}
             onPress={handlePress}
           >
-            <Text>c</Text>
+            <CheckMark color={useToken("colors", "black")} />
           </Pressable>
         </HStack>
         <VStack flexWrap="wrap" justifyContent={"center"} space={"3px"}>

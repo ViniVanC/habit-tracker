@@ -1,4 +1,4 @@
-import { HStack } from "native-base";
+import { HStack, useToken } from "native-base";
 import React from "react";
 import { Logo } from "./Logo";
 import { Timer } from "./Timer";
@@ -13,7 +13,7 @@ export const Header = () => {
       alignItems="center"
       justifyContent={"space-between"}
     >
-      <Logo color={"#FFF0CB"} />
+      <Logo color={useToken("colors", "white")} />
       <Timer />
     </HStack>
   );
