@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Box, HStack, Pressable, Text, VStack, useToken } from "native-base";
 import { CheckMark } from "./CheckMark";
+import { HabitSettingsModal } from "./HabitSettingsModal";
 
 export const Habit = () => {
   const [days, setDays] = useState([]);
   const [currentDay, setCurrentDay] = useState(null); // Поточний день
   const [buttonActive, setButtonActive] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + "...";
+  };
+
+  const openSettingsModal = () => {
+    setShowModal(true);
+  };
+  const closeSettingsModal = () => {
+    setShowModal(false);
   };
 
   useEffect(() => {
@@ -95,60 +104,66 @@ export const Habit = () => {
   };
 
   return (
-    <Pressable w={"300px"} >
-      <VStack
-        space={"10px"}
-        p={"10px"}
-        pt={"5px"}
-        borderColor={"white"}
-        borderRadius={"10px"}
-        borderWidth={"2px"}
-      >
-        <HStack justifyContent={"space-between"} alignItems={"center"}>
-          <VStack>
-            <Text fontSize={"18px"} fontWeight={"700"} color={"white"}>
-              Title
-            </Text>
-            <Text fontSize={"14px"} color={"white"}>
-              {truncateText(
-                "Lorem ipsum dolor sit amet consectetur adipisicing",
-                30 // Максимальна довжина тексту
-              )}
-            </Text>
+    <>
+      <Pressable w={"300px"} onPress={openSettingsModal}>
+        <VStack
+          space={"10px"}
+          p={"10px"}
+          pt={"5px"}
+          borderColor={"white"}
+          borderRadius={"10px"}
+          borderWidth={"2px"}
+        >
+          <HStack justifyContent={"space-between"} alignItems={"center"}>
+            <VStack>
+              <Text fontSize={"18px"} fontWeight={"700"} color={"white"}>
+                Title
+              </Text>
+              <Text fontSize={"14px"} color={"white"}>
+                {truncateText(
+                  "Lorem ipsum dolor sit amet consectetur adipisicing",
+                  30 // Максимальна довжина тексту
+                )}
+              </Text>
+            </VStack>
+            <Pressable
+              w={"35px"}
+              h={"35px"}
+              bg={"white"}
+              opacity={buttonActive ? 1 : 0.5}
+              borderRadius={"7px"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              onPress={handlePress}
+            >
+              <CheckMark color={useToken("colors", "black")} />
+            </Pressable>
+          </HStack>
+          <VStack flexWrap="wrap" justifyContent={"center"} space={"3px"}>
+            {days.map((week, weekIndex) => (
+              <HStack key={weekIndex} space={"3px"}>
+                {week &&
+                  week.map((day) => (
+                    <Box
+                      key={day.id}
+                      flex={1}
+                      h={"15px"}
+                      borderRadius={"5px"}
+                      bg={day.current ? "white" : "#555"}
+                      opacity={day.done ? 1 : 0.4}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    />
+                  ))}
+              </HStack>
+            ))}
           </VStack>
-          <Pressable
-            w={"35px"}
-            h={"35px"}
-            bg={"white"}
-            opacity={buttonActive ? 1 : 0.5}
-            borderRadius={"7px"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            onPress={handlePress}
-          >
-            <CheckMark color={useToken("colors", "black")} />
-          </Pressable>
-        </HStack>
-        <VStack flexWrap="wrap" justifyContent={"center"} space={"3px"}>
-          {days.map((week, weekIndex) => (
-            <HStack key={weekIndex} space={"3px"}>
-              {week &&
-                week.map((day) => (
-                  <Box
-                    key={day.id}
-                    flex={1}
-                    h={"15px"}
-                    borderRadius={"5px"}
-                    bg={day.current ? "white" : "#555"}
-                    opacity={day.done ? 1 : 0.4}
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                  />
-                ))}
-            </HStack>
-          ))}
         </VStack>
-      </VStack>
-    </Pressable>
+      </Pressable>
+      <HabitSettingsModal
+        showModal={showModal}
+        closeSettingsModal={closeSettingsModal}
+      />
+    </>
   );
 };
