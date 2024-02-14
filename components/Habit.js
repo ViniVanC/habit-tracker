@@ -31,13 +31,17 @@ export const Habit = () => {
       let prevMonthLastDay = new Date(year, month, 0).getDate(); // Останній день попереднього місяця
 
       for (let i = prevMonthDays; i > 0; i--) {
-        week.push({ id: `${month}-${prevMonthLastDay--}`, done: false });
+        week.push({
+          id: `${month}-${prevMonthLastDay--}`,
+          done: false,
+          current: false,
+        });
       }
       week.reverse();
 
       // Додаємо дні поточного місяця
       for (let i = 1; i <= daysInMonth; i++) {
-        const day = { id: `${month}-${i}`, done: false };
+        const day = { id: `${month}-${i}`, done: false, current: true };
         week.push(day);
         if (week.length === 7) {
           monthArray.push(week);
@@ -53,9 +57,9 @@ export const Habit = () => {
       }
 
       // Додаємо дні з наступного місяця до останнього рядка, якщо потрібно
-      if (monthArray.length < 5) {
+      if (monthArray.length < 6) {
         let nextMonthDay = 1;
-        while (monthArray.length < 5) {
+        while (monthArray.length < 6) {
           const day = { id: `${month}-${nextMonthDay}`, done: false };
           week.push(day);
           nextMonthDay++;
@@ -134,8 +138,8 @@ export const Habit = () => {
                     flex={1}
                     h={"15px"}
                     borderRadius={"5px"}
-                    bg={"white"}
-                    opacity={day.done ? 1 : 0.3}
+                    bg={day.current ? "white" : "#555"}
+                    opacity={day.done ? 1 : 0.4}
                     justifyContent={"center"}
                     alignItems={"center"}
                   />
