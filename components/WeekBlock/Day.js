@@ -17,7 +17,7 @@ export const Day = ({ children, active }) => {
       }}
     >
       <Text
-        color={"white"}
+        color={active ? "black" : "white"}
         fontSize={"16px"}
         fontWeight={"700"}
         textTransform={"capitalize"}
